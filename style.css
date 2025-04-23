@@ -1,0 +1,147 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(bg1.png);
+    position: static;
+  }
+  
+  .form-wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+  }
+  
+  .form-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-image: url(bg2.png);
+  }
+  
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  input:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  }
+  
+  /* Validation animations */
+  input.invalid, textarea.invalid {
+    border-color: #E74C3C;
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  input.invalid + .error-message, textarea.invalid + .error-message {
+    opacity: 1;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #3c7dc3;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    display: block;
+  }
+  
+  .success-message {
+    color: green;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .password-group {
+    position: relative;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
+    font-size: 1rem;
+  }
+  
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #FF5733;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 8px rgba(255, 87, 51, 0.5);
+  }
+  
+  @media (max-width: 600px) {
+    .form-wrapper {
+      padding: 1rem;
+    }
+  
+    .form-container {
+      padding: 1.5rem;
+    }
+  
+    input, textarea, button {
+      font-size: 1rem;
+    }
+  }
+  
+  

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Registration</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="form-wrapper">
+    <form class="form-container" id="registrationForm" novalidate>
+      <h2>User Registration</h2>
+
+      <div class="form-group">
+        <input type="text" id="fullName" placeholder="Full Name" required aria-describedby="fullNameError" />
+        <small class="error-message" id="fullNameError"></small>
+      </div>
+
+      <div class="form-group">
+        <input type="email" id="email" placeholder="Email Address" required aria-describedby="emailError" />
+        <small class="error-message" id="emailError"></small>
+      </div>
+
+      <div class="form-group">
+        <input type="number" id="phone" placeholder="Phone Number" required aria-describedby="phoneError" />
+        <small class="error-message" id="phoneError"></small>
+      </div>
+
+      <div class="form-group password-group">
+        <input type="password" id="password" placeholder="Password" required aria-describedby="passwordError" />
+        <span class="toggle-password" onclick="togglePassword('password', this)">👁️</span>
+        <small class="error-message" id="passwordError"></small>
+      </div>
+
+      <div class="form-group password-group">
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required aria-describedby="confirmPasswordError" />
+        <span class="toggle-password" onclick="togglePassword('confirmPassword')">👁️</span>
+        <small class="error-message" id="confirmPasswordError"></small>
+      </div>
+
+      <button type="submit">Register</button>
+      <p class="success-message" id="successMessage"></p>
+    </form>
+  </div>
+
+  <script src="index.js"></script>
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+
+      let isValid = true;
+
+      document.querySelectorAll('.error-message').forEach(msg => msg.textContent = '');
+
+      const fullName = document.getElementById('fullName').value;
+      if (!fullName) {
+        document.getElementById('fullNameError').textContent = "Full Name is required.";
+        isValid = false;
+      }
+
+      const email = document.getElementById('email').value;
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      if (!email) {
+        document.getElementById('emailError').textContent = "Email is required.";
+        isValid = false;
+      } else if (!emailPattern.test(email)) {
+        document.getElementById('emailError').textContent = "Please enter a valid email address.";
+        isValid = false;
+      }
+
+      const phone = document.getElementById('phone').value;
+      const phonePattern = /^\d{10}$/;
+      if (!phone) {
+        document.getElementById('phoneError').textContent = "Phone number is required.";
+        isValid = false;
+      } else if (!phonePattern.test(phone)) {
+        document.getElementById('phoneError').textContent = "Phone number must be 10 digits.";
+        isValid = false;
+      }
+
+      const password = document.getElementById('password').value;
+      if (!password) {
+        document.getElementById('passwordError').textContent = "Password is required.";
+        isValid = false;
+      } else if (password.length < 6) {
+        document.getElementById('passwordError').textContent = "Password must be at least 6 characters.";
+        isValid = false;
+      }
+
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      if (!confirmPassword) {
+        document.getElementById('confirmPasswordError').textContent = "Confirm Password is required.";
+        isValid = false;
+      } else if (confirmPassword !== password) {
+        document.getElementById('confirmPasswordError').textContent = "Passwords do not match.";
+        isValid = false;
+      }
+
+      if (isValid) {
+        document.getElementById('successMessage').textContent = "Registration successful!";
+      }
+    });
+
+    function togglePassword(inputId, icon) {
+      const input = document.getElementById(inputId);
+      const type = input.type === 'password' ? 'text' : 'password';
+      input.type = type;
+      icon.textContent = type === 'password' ? '👁️' : '🙈';
+    }
+  </script>
+</body>
+</html>
